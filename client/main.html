@@ -1,0 +1,71 @@
+<head>
+  <meta charset="UTF-8">
+  <title>App Ideas Picker</title>
+</head>
+<body>
+{{>navbar}}
+
+{{#if currentUser}}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-6">{{>newIdea}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">{{>ideaList}}</div>
+    </div>
+  </div>
+{{else}}
+  <p>Please log in!</p>
+{{/if}}
+</body>
+
+<template name="newIdea">
+  <form class="new-idea form-inline">
+    <div class="form-group">
+      <input class="form-control" name="name" placeholder="Add a new idea...">
+    </div>
+    <button class="btn btn-primary" type="submit">Add</button>
+  </form>
+</template>
+
+<template name="ideaList">
+  <ul class="idea-list list-group">
+      {{#each ideas}}
+          {{> ideaItem}}
+      {{/each}}
+  </ul>
+</template>
+
+<template name="ideaItem">
+  <li class="idea-item list-group-item">
+    <div class="btn-group">
+      <button class="btn btn-xs arrow-up upvote {{#if votedUp}}btn-success{{else}}btn-default{{/if}}">
+        <i class="glyphicon glyphicon-chevron-up"></i>
+      </button>
+      <button class="btn btn-xs arrow-down downvote {{#if votedDown}}btn-danger{{else}}btn-default{{/if}}">
+        <i class="glyphicon glyphicon-chevron-down"></i>
+      </button>
+    </div>
+    <span class="label label-info score">{{score}}</span>
+    <span class="name">{{name}}</span>
+      {{#if joined}}
+        <button class="btn btn-xs btn-danger pull-right leave">Leave</button>
+      {{else}}
+        <button class="btn btn-xs btn-success pull-right join">Join</button>
+      {{/if}}
+      {{#each users}}<img src="{{avatarSrc}}" class="pull-right">{{/each}}
+  </li>
+</template>
+
+<template name="navbar">
+  <div class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">App Ideas Picker</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+          {{> loginButtons }}
+      </ul>
+    </div>
+  </div>
+</template>
