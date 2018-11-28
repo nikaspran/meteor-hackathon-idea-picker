@@ -5,3 +5,4 @@ A Meteor project developed during the [Worldwide Meteor Day Vilnius event](http:
 Simple app for an idea list.
 
 TEST
+TEST AGAIN
